@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weft: plan focus time between your meetings</title>
+  <meta name="description" content="Weft reads your calendar, finds the open stretches, and threads your priorities through them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="weave.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header wrap">
+    <a class="wordmark" href="#" aria-label="Weft home">Weft</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#review">Friday review</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#">Sign in</a>
+    </nav>
+    <a class="button button--small" href="#start">Connect your calendar</a>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="hero__title">Weave your real work between meetings.</h1>
+
+      <div class="hero__lede">
+        <p>Weft reads your calendar, finds the open stretches, and threads your priorities through them in 25 or 60 minute blocks. When a meeting lands on a block, Weft moves the block instead of dropping it.</p>
+        <div class="hero__actions">
+          <a class="button" href="#start">Connect your calendar</a>
+          <span class="hero__note">Free for one calendar</span>
+        </div>
+      </div>
+
+      <figure class="loom">
+        <div class="loom__scroll">
+          <svg class="weave weave--hero" id="hero-weave" role="img" aria-labelledby="hero-weave-title hero-weave-desc">
+            <title id="hero-weave-title">A sample week planned by Weft</title>
+            <desc id="hero-weave-desc">Seven days from 7am to 11pm. The priority, an onboarding redesign, runs through every weekday for 11 hours 25 minutes in total. Wednesday is almost all meetings. Tuesday and Thursday have the longest uninterrupted stretches.</desc>
+          </svg>
+        </div>
+        <figcaption class="loom__caption">
+          <ul class="legend">
+            <li><span class="key key--priority" aria-hidden="true"></span>This week’s priority</li>
+            <li><span class="key key--focus" aria-hidden="true"></span>Other focus work</li>
+            <li><span class="key key--meeting" aria-hidden="true"></span>Meetings</li>
+            <li><span class="key key--rest" aria-hidden="true"></span>Breaks and time off</li>
+          </ul>
+          <p class="loom__readout" id="readout" data-default="A sample week. Point at any thread to see what it is.">A sample week. Point at any thread to see what it is.</p>
+          <button class="replay" type="button" id="replay">Replay the week</button>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="how wrap" id="how" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3>Connect your calendar</h3>
+          <p>Google Calendar, Outlook, or iCloud. Your meetings stay exactly where they are, and Weft plans around them.</p>
+        </li>
+        <li>
+          <h3>Name this week’s priority</h3>
+          <p>Pick one thing. Weft gives it the longest open stretches first, then fits your other tasks into whatever is left.</p>
+        </li>
+        <li>
+          <h3>Work the plan</h3>
+          <p>Blocks show up on your calendar as busy. If someone books over one, Weft moves it to the next gap that fits and tells you where it went.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="review wrap" id="review" aria-labelledby="review-title">
+      <div class="review__intro">
+        <h2 id="review-title">Every Friday, a swatch of your week</h2>
+        <p>Weft keeps each finished week as a small piece of cloth. Line up a month of them and you’ll see patterns a calendar hides.</p>
+      </div>
+
+      <ul class="swatches">
+        <li class="swatch">
+          <div class="swatch__cloth"><svg class="weave" data-swatch="long" role="img" aria-label="A week of long, unbroken bands of focus work"></svg></div>
+          <h3>Long bands</h3>
+          <p class="swatch__week">Week of Aug 31</p>
+          <p>The priority got 18 hours, most of it before lunch.</p>
+        </li>
+        <li class="swatch">
+          <div class="swatch__cloth"><svg class="weave" data-swatch="barcode" role="img" aria-label="A week that is almost entirely meetings"></svg></div>
+          <h3>Mostly barcode</h3>
+          <p class="swatch__week">Week of Sep 7</p>
+          <p>Meetings filled most mornings. Weft found three recurring ones that could move to the afternoon.</p>
+        </li>
+        <li class="swatch">
+          <div class="swatch__cloth"><svg class="weave" data-swatch="scattered" role="img" aria-label="A week of short, scattered blocks"></svg></div>
+          <h3>Short and scattered</h3>
+          <p class="swatch__week">Week of Sep 14</p>
+          <p>No focus block lasted longer than 25 minutes. Weft suggests batching small tasks into one hour.</p>
+        </li>
+        <li class="swatch">
+          <div class="swatch__cloth"><svg class="weave" data-swatch="rest" role="img" aria-label="A week that is mostly time off"></svg></div>
+          <h3>Mostly green</h3>
+          <p class="swatch__week">Week of Sep 21</p>
+          <p>Thursday and Friday off, and the priority still got five hours on Monday and Tuesday.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="details wrap" aria-labelledby="details-title">
+      <h2 id="details-title">What Weft handles for you</h2>
+      <dl class="details__list">
+        <div>
+          <dt>Moves blocks instead of deleting them</dt>
+          <dd>A new meeting on top of a focus block pushes the block to the next open gap that fits. You get one short note saying where it landed.</dd>
+        </div>
+        <div>
+          <dt>Sizes blocks to the task</dt>
+          <dd>Small tasks get 25 minutes. Anything that needs real thinking gets an hour, or several hours in a row when your calendar allows it.</dd>
+        </div>
+        <div>
+          <dt>Keeps task names private</dt>
+          <dd>Coworkers see your blocks as busy. What you’re working on stays between you and Weft.</dd>
+        </div>
+        <div>
+          <dt>Works with the calendars you have</dt>
+          <dd>Google Calendar, Outlook, and iCloud, with apps for Mac, Windows, iPhone, and Android.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="pricing wrap" id="pricing" aria-labelledby="pricing-title">
+      <h2 id="pricing-title">Pricing</h2>
+      <div class="plans">
+        <div class="plan">
+          <h3>Free</h3>
+          <p class="plan__price">$0</p>
+          <p>One calendar, one priority a week, and your last four swatches.</p>
+        </div>
+        <div class="plan">
+          <h3>Plus</h3>
+          <p class="plan__price">$6 <span>a month</span></p>
+          <p>Every calendar you use, up to three priorities a week, and your full swatch history.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="start wrap" id="start" aria-labelledby="start-title">
+      <h2 id="start-title">Plan the rest of this week</h2>
+      <p>Connect a calendar and Weft fills your open time in about a minute. You can move anything it places.</p>
+      <a class="button" href="#start">Connect your calendar</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="selvedge" aria-hidden="true"></div>
+    <div class="site-footer__inner wrap">
+      <span class="wordmark wordmark--footer">Weft</span>
+      <nav aria-label="Footer">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p class="site-footer__legal">© 2026 Weft</p>
+    </div>
+  </footer>
+</body>
+</html>

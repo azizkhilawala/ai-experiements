@@ -1,0 +1,624 @@
+/* Weft
+   Warp (the fixed structure) is set condensed; weft (the work you weave in) is set expanded. */
+
+:root {
+  --ground: #F1F3EE;
+  --cloth: #E4E7E0;
+  --ink: #21173A;
+  --ink-soft: #555069;
+  --warp: rgb(33 23 58 / 0.16);
+
+  --priority: #C4247E;
+  --priority-deep: #A91D6B;
+  --focus: #55AACC;
+  --meeting: #DDBB33;
+  --rest: #AADDBB;
+
+  --font: "Anybody", system-ui, sans-serif;
+  --condensed: 72%;
+  --expanded: 140%;
+
+  /* Traditional scale: 14 · 18 · 21 · 24 · 36 · 48 · 72 */
+  --step-small: 0.875rem;
+  --step-body: 1.125rem;
+  --step-h3: 1.3125rem;
+  --step-lede: 1.5rem;
+  --step-h2: clamp(2.25rem, 4vw, 3rem);
+  --step-h1: clamp(2.25rem, 4.6vw, 3.75rem);
+
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --col-gap: clamp(0.5rem, 1.4vw, 1.25rem);
+  --section: clamp(5rem, 11vw, 9rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--step-body);
+  font-stretch: 100%;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ol,
+ul,
+figure {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: var(--ground);
+  z-index: 10;
+}
+
+.skip:focus {
+  top: 1rem;
+}
+
+.wrap {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Buttons are floats: a single weft thread with rounded ends. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  background: var(--priority);
+  color: #fff;
+  font-weight: 650;
+  font-stretch: 110%;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease;
+}
+
+.button:hover {
+  background: var(--priority-deep);
+}
+
+.button--small {
+  min-height: 2.5rem;
+  padding: 0 1.125rem;
+  font-size: 1rem;
+}
+
+/* Header */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-block: 1.5rem;
+}
+
+.wordmark {
+  font-size: 1.75rem;
+  font-weight: 800;
+  font-stretch: 150%;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.75rem;
+  margin-left: auto;
+  font-size: 1rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+  text-underline-offset: 0.3em;
+}
+
+.site-nav a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+/* Hero */
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.hero__title {
+  grid-column: 1 / -1;
+  font-size: var(--step-h1);
+  font-weight: 750;
+  font-stretch: var(--expanded);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Steps down and right from the headline, like a twill line. */
+.hero__lede {
+  grid-column: 9 / -1;
+  margin-top: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+
+.hero__lede p {
+  max-width: 34em;
+  font-size: var(--step-body);
+  color: var(--ink-soft);
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.hero__note {
+  font-size: 0.9375rem;
+  font-stretch: var(--condensed);
+  color: var(--ink-soft);
+}
+
+/* The loom */
+
+.loom {
+  grid-column: 1 / -1;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.loom__scroll {
+  overflow-x: auto;
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  scrollbar-width: thin;
+}
+
+.weave {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.weave--hero {
+  min-width: 760px;
+}
+
+.weave text {
+  font-family: var(--font);
+  font-stretch: var(--condensed);
+  font-size: 15px;
+  font-weight: 500;
+  fill: var(--ink-soft);
+}
+
+.weave .weave__day {
+  font-weight: 650;
+  fill: var(--ink);
+}
+
+.weave__warp line {
+  stroke: var(--warp-line, var(--warp));
+  stroke-width: 1.5;
+}
+
+.weave__beam {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.thread {
+  transition: opacity 150ms ease;
+}
+
+.thread__hit {
+  fill: transparent;
+}
+
+.thread--priority .thread__float { fill: var(--priority); }
+.thread--focus .thread__float { fill: var(--focus); }
+.thread--rest .thread__float { fill: var(--rest); }
+
+.thread--meeting .thread__stitch { fill: var(--meeting); }
+
+.thread--meeting .thread__spine {
+  stroke: var(--meeting);
+  stroke-width: 2;
+}
+
+.thread__tie {
+  fill: var(--cloth, var(--ground));
+}
+
+.weave--hero .thread__tie {
+  fill: var(--ground);
+}
+
+.weave.is-pointing .thread:not(.is-active) {
+  opacity: 0.3;
+}
+
+.shuttle path {
+  fill: var(--ink);
+}
+
+.shuttle__bobbin {
+  fill: var(--meeting);
+}
+
+.loom__caption {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem 2rem;
+  margin-top: 1.25rem;
+  font-size: var(--step-small);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  padding: 0;
+  list-style: none;
+  font-stretch: var(--condensed);
+  font-size: 0.9375rem;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.key {
+  display: inline-block;
+  width: 1.5rem;
+  height: 0.625rem;
+  border-radius: 999px;
+}
+
+.key--priority { background: var(--priority); }
+.key--focus { background: var(--focus); }
+.key--rest { background: var(--rest); height: 0.375rem; }
+
+.key--meeting {
+  height: 0.875rem;
+  border-radius: 0;
+  background: repeating-linear-gradient(90deg, var(--meeting) 0 3px, transparent 3px 6px);
+}
+
+.loom__readout {
+  color: var(--ink-soft);
+  min-height: 1.55em;
+}
+
+.replay {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0.25rem 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  cursor: pointer;
+}
+
+.replay:hover {
+  text-decoration-color: var(--priority);
+}
+
+/* Sections */
+
+.how,
+.review,
+.details,
+.pricing {
+  padding-top: var(--section);
+}
+
+h2 {
+  font-size: var(--step-h2);
+  font-weight: 750;
+  font-stretch: var(--expanded);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: var(--step-h3);
+  font-weight: 650;
+  font-stretch: 105%;
+  line-height: 1.25;
+}
+
+/* How it works: an ordered sequence, so it's numbered. */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem var(--col-gap);
+  margin-top: 3rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  counter-increment: step;
+  padding-top: 1.25rem;
+  border-top: 3px solid var(--ink);
+  padding-right: 1.5rem;
+}
+
+.steps li::before {
+  content: counter(step);
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 3.75rem;
+  font-weight: 400;
+  font-stretch: 50%;
+  line-height: 1;
+}
+
+.steps p {
+  margin-top: 0.75rem;
+  max-width: 30em;
+  color: var(--ink-soft);
+}
+
+/* Friday review: the swatch book */
+
+.review__intro {
+  max-width: 40rem;
+}
+
+.review__intro p {
+  margin-top: 1.25rem;
+  color: var(--ink-soft);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3rem var(--col-gap);
+  margin-top: 3.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.swatch__cloth {
+  --z: 12px;
+  --warp-line: rgb(33 23 58 / 0.12);
+  background: var(--cloth);
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--z) 51% repeat-x,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / var(--z) 51% repeat-x;
+}
+
+.swatch h3 {
+  margin-top: 1.25rem;
+}
+
+.swatch__week {
+  font-size: var(--step-small);
+  font-stretch: var(--condensed);
+  color: var(--ink-soft);
+}
+
+.swatch__week + p {
+  margin-top: 0.625rem;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+/* Details */
+
+.details__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem calc(var(--col-gap) * 4);
+  margin-top: 3rem;
+}
+
+.details__list > div {
+  padding-top: 1.25rem;
+  border-top: 1.5px solid var(--warp);
+}
+
+.details dt {
+  font-size: var(--step-h3);
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.details dd {
+  margin-top: 0.625rem;
+  max-width: 32em;
+  color: var(--ink-soft);
+}
+
+/* Pricing */
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem calc(var(--col-gap) * 4);
+  margin-top: 3rem;
+}
+
+.plan {
+  padding-top: 1.25rem;
+  border-top: 3px solid var(--ink);
+}
+
+.plan__price {
+  margin-block: 0.5rem 0.75rem;
+  font-size: var(--step-h2);
+  font-weight: 700;
+  font-stretch: var(--expanded);
+  line-height: 1.1;
+}
+
+.plan__price span {
+  font-size: var(--step-body);
+  font-weight: 500;
+  font-stretch: var(--condensed);
+  color: var(--ink-soft);
+}
+
+.plan p:last-child {
+  max-width: 30em;
+  color: var(--ink-soft);
+}
+
+/* Closing call to action */
+
+.start {
+  padding-block: var(--section);
+}
+
+.start p {
+  max-width: 34em;
+  margin-block: 1.25rem 2rem;
+  font-size: var(--step-lede);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* Footer: the selvedge is the finished edge, with one magenta ID line woven in. */
+
+.site-footer {
+  background: var(--ink);
+  color: var(--ground);
+}
+
+.selvedge {
+  height: 1.5rem;
+  background:
+    linear-gradient(var(--priority), var(--priority)) 0 50% / 100% 3px no-repeat,
+    repeating-linear-gradient(-60deg, rgb(241 243 238 / 0.14) 0 2px, transparent 2px 7px),
+    var(--ink);
+}
+
+.site-footer__inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding-block: 2.5rem 3rem;
+  font-size: 1rem;
+}
+
+.wordmark--footer {
+  font-size: 1.5rem;
+}
+
+.site-footer nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.site-footer a {
+  color: var(--ground);
+  text-underline-offset: 0.3em;
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--ground);
+}
+
+.site-footer__legal {
+  font-stretch: var(--condensed);
+  color: #B9B3CC;
+}
+
+/* Smaller screens */
+
+@media (max-width: 960px) {
+  .hero__title { grid-column: 1 / -1; }
+  .hero__lede { grid-column: 5 / -1; }
+
+  .loom__caption {
+    grid-template-columns: 1fr auto;
+  }
+
+  .legend { grid-column: 1 / -1; }
+
+  .steps { grid-template-columns: 1fr; }
+
+  .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .site-nav { display: none; }
+  .site-header { justify-content: space-between; }
+
+  .hero__lede { grid-column: 1 / -1; }
+
+  .details__list,
+  .plans {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer nav { margin-left: 0; }
+  .site-footer__legal { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .swatches { grid-template-columns: 1fr; }
+  .button--small { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .thread,
+  .button { transition: none; }
+}
